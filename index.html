@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
       --red: #e63946;
@@ -476,189 +475,18 @@
     }
     select option { background: var(--bg-1); color: var(--t1); }
 
-    fieldset { border: 0; margin: 0 0 0.85rem; padding: 0; }
-
-    .choice {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
-
-    .choice label {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin: 0;
-      padding: 0.6rem 0.7rem;
+    .google-form-wrap {
+      overflow: hidden;
       border: 1px solid var(--border);
       border-radius: var(--r-sm);
-      text-transform: none;
-      letter-spacing: 0;
-      font-family: var(--sans);
-      font-size: 0.84rem;
-      font-weight: 500;
-      color: var(--t1);
-      cursor: pointer;
-      background: rgba(255,255,255,0.02);
-      transition: border-color 0.2s, background 0.2s;
+      background: #fff;
+      min-height: 900px;
     }
-    .choice label:hover { border-color: rgba(255,255,255,0.12); }
-    .choice label:has(input:checked) {
-      border-color: var(--red);
-      background: rgba(230,57,70,0.07);
-    }
-    .choice input { accent-color: var(--red); }
-
-    .hidden { display: none !important; }
-
-    .submit-btn {
-      width: 100%;
-      margin-top: 0.15rem;
-      border: 0;
-      border-radius: var(--r-sm);
-      background: linear-gradient(135deg, var(--red), var(--red-deep));
-      color: #fff;
-      font: inherit;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.8rem 1rem;
-      cursor: pointer;
-      box-shadow: 0 4px 18px var(--red-glow);
-      transition: all 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .submit-btn:hover {
-      box-shadow: 0 6px 28px rgba(230,57,70,0.45);
-      transform: translateY(-1px);
-    }
-    .submit-btn:disabled { opacity: 0.5; cursor: wait; transform: none; box-shadow: none; }
-
-    /* ══════════ TICKET UI ══════════ */
-    .rsvp-ticket {
-      background: linear-gradient(145deg, rgba(26, 26, 32, 0.95), rgba(18, 18, 22, 0.98));
-      border: 1px solid rgba(245, 197, 24, 0.35);
-      border-radius: var(--r);
-      padding: 1.5rem;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(245, 197, 24, 0.08);
-      overflow: hidden;
-      animation: rise 0.4s ease-out;
-    }
-
-    .rsvp-ticket::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--red), var(--gold));
-    }
-
-    .ticket-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
-      margin-bottom: 1.2rem;
-    }
-
-    .ticket-badge {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .ticket-status-tag {
-      padding: 0.25rem 0.65rem;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      background: rgba(245, 197, 24, 0.15);
-      color: var(--gold);
-      border: 1px solid rgba(245, 197, 24, 0.4);
-    }
-    .ticket-status-tag.no {
-      background: rgba(230, 57, 70, 0.15);
-      color: var(--red);
-      border-color: rgba(230, 57, 70, 0.4);
-    }
-
-    .ticket-main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 640px) {
-      .ticket-main-grid { grid-template-columns: 1fr; }
-    }
-
-    .t-field .t-lbl {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--t3);
-      margin-bottom: 0.25rem;
+    .google-form-wrap iframe {
       display: block;
-    }
-
-    .t-field .t-val {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--t1);
-    }
-    .t-field .t-val.name {
-      font-family: var(--font-title);
-      font-size: 1.2rem;
-      color: #fff;
-    }
-    .t-field .t-val.highlight {
-      color: var(--gold);
-    }
-
-    .ticket-quote-box {
-      background: rgba(0, 0, 0, 0.3);
-      border-left: 3px solid var(--gold);
-      padding: 0.75rem 1rem;
-      border-radius: 0 var(--r-sm) var(--r-sm) 0;
-      font-style: italic;
-      font-size: 0.88rem;
-      color: var(--t2);
-      margin-top: 0.5rem;
-      word-break: break-word;
-    }
-
-    .ticket-footer-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1.2rem;
-      padding-top: 1rem;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .ticket-code-str {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--t3);
-      letter-spacing: 0.08em;
-    }
-    .ticket-code-str span {
-      color: var(--gold);
-      font-weight: 700;
+      width: 100%;
+      min-height: 900px;
+      border: 0;
     }
 
     /* ══════════ MAP ══════════ */
@@ -787,37 +615,6 @@
       font-weight: 600;
       margin-bottom: 0.3rem;
     }
-
-    /* ══════════ TOAST ══════════ */
-    .toast {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 200;
-      max-width: min(360px, calc(100vw - 2rem));
-      background: var(--bg-2);
-      color: var(--t1);
-      padding: 0.85rem 1.1rem;
-      border-radius: var(--r);
-      border: 1px solid var(--border-a);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
-      transform: translateY(120%);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      pointer-events: none;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
-    .toast .tt {
-      font-family: var(--mono);
-      font-size: 0.63rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.2rem;
-    }
-    .toast .tm { font-size: 0.85rem; }
 
     /* ══════════ ANIMATIONS ══════════ */
     @keyframes rise {
@@ -1074,78 +871,13 @@
           </div>
         </div>
 
-        <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 1.25rem;">
-          <div>
-            <label for="guestName">Họ và tên *</label>
-            <input type="text" id="guestName" required placeholder="Nhập họ và tên của bạn" autocomplete="name">
-
-            <fieldset>
-              <legend>Bạn có tham dự không? *</legend>
-              <div class="choice">
-                <label>
-                  <input type="radio" name="attendance" value="yes" required onchange="toggleArrivalTime()">
-                  Có, mình sẽ đến
-                </label>
-                <label>
-                  <input type="radio" name="attendance" value="no" onchange="toggleArrivalTime()">
-                  Không thể tham dự
-                </label>
-              </div>
-            </fieldset>
-
-            <div id="arrivalTimeField" class="hidden">
-              <label for="arrivalTime">Giờ dự kiến đến *</label>
-              <select id="arrivalTime">
-                <option value="">Chọn giờ</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display:flex; flex-direction:column;">
-            <label for="guestMessage">Lời nhắn</label>
-            <textarea id="guestMessage" rows="5" placeholder="Gửi Minh một lời chúc..." style="flex:1; min-height:120px;"></textarea>
-          </div>
-
-          <div style="grid-column: 1 / -1; margin-top: 0.25rem;">
-            <button type="submit" class="submit-btn">Gửi xác nhận</button>
-          </div>
-        </form>
-
-        <!-- RSVP Ticket View (Hidden until submit) -->
-        <div id="rsvpTicket" class="rsvp-ticket hidden">
-          <div class="ticket-header-bar">
-            <div class="ticket-badge">✨ VÉ XÁC NHẬN THAM DỰ</div>
-            <div id="ticketStatusTag" class="ticket-status-tag">✓ Sẽ đến tham dự</div>
-          </div>
-
-          <div class="ticket-main-grid">
-            <div class="t-field">
-              <span class="t-lbl">Khách mời</span>
-              <div id="ticketName" class="t-val name">—</div>
-            </div>
-            <div class="t-field" id="ticketTimeWrap">
-              <span class="t-lbl">Giờ dự kiến đến</span>
-              <div id="ticketTimeVal" class="t-val highlight">—</div>
-            </div>
-          </div>
-
-          <div class="t-field" style="margin-bottom: 0.8rem;">
-            <span class="t-lbl">Địa điểm diễn ra</span>
-            <div class="t-val">Hội trường C2, Đại học Bách khoa Hà Nội</div>
-          </div>
-
-          <div class="t-field" id="ticketMessageWrap">
-            <span class="t-lbl">Lời chúc gửi tới Minh</span>
-            <div id="ticketMessageVal" class="ticket-quote-box">—</div>
-          </div>
-
-          <div class="ticket-footer-bar">
-            <div class="ticket-code-str">MÃ VÉ: <span id="ticketCodeVal">#HUST-2026</span></div>
-            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <button type="button" class="btn btn-sm" onclick="editRSVP()">✏️ Chỉnh sửa lại</button>
-              <button type="button" class="btn btn-sm btn-primary" onclick="addToGoogleCalendar()">📅 Thêm Calendar</button>
-            </div>
-          </div>
+        <div class="google-form-wrap">
+          <iframe
+            title="Biểu mẫu xác nhận tham dự lễ tốt nghiệp"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdaNMpXzQcE26igujcDyltMML9BJrVQHF9tbOl8fZQiPV9pUQ/viewform?embedded=true"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
         </div>
       </div>
 
@@ -1159,12 +891,6 @@
       Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội
     </div>
   </footer>
-
-  <!-- ══════════ TOAST ══════════ -->
-  <div id="toastNotification" class="toast" role="status" aria-live="polite">
-    <div class="tt" id="toastTitle">Thông báo</div>
-    <div class="tm" id="toastMessage"></div>
-  </div>
 
   <script>
     /* ── Nav: explicit click-to-scroll ── */
@@ -1223,15 +949,6 @@
       revealObs.observe(c);
     });
 
-    /* ── Responsive RSVP form grid ── */
-    function adjustFormLayout() {
-      const form = document.getElementById('rsvpForm');
-      if (!form) return;
-      form.style.gridTemplateColumns = window.innerWidth <= 640 ? '1fr' : '1fr 1fr';
-    }
-    adjustFormLayout();
-    window.addEventListener('resize', adjustFormLayout);
-
     /* ── App data ── */
     const appData = {
       name: "Lê Viết Minh",
@@ -1272,145 +989,6 @@
       document.getElementById("countSeconds").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
     }
 
-    function renderTicket(data) {
-      const ticketEl = document.getElementById("rsvpTicket");
-      const formEl = document.getElementById("rsvpForm");
-      if (!ticketEl || !formEl) return;
-
-      document.getElementById("ticketName").textContent = data.name;
-      
-      const isYes = data.attendance === 'yes';
-      const statusTag = document.getElementById("ticketStatusTag");
-      statusTag.textContent = isYes ? "✓ Sẽ đến tham dự" : "✗ Không thể tham dự";
-      statusTag.className = isYes ? "ticket-status-tag" : "ticket-status-tag no";
-
-      const timeWrap = document.getElementById("ticketTimeWrap");
-      if (isYes && data.arrivalTime) {
-        timeWrap.style.display = "block";
-        document.getElementById("ticketTimeVal").textContent = `${data.arrivalTime} — Chủ Nhật, 27/09/2026`;
-      } else {
-        timeWrap.style.display = "none";
-      }
-
-      const msgWrap = document.getElementById("ticketMessageWrap");
-      if (data.message) {
-        msgWrap.style.display = "block";
-        document.getElementById("ticketMessageVal").textContent = `"${data.message}"`;
-      } else {
-        msgWrap.style.display = "none";
-      }
-
-      const code = data.code || `#HUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-      document.getElementById("ticketCodeVal").textContent = code;
-
-      formEl.classList.add("hidden");
-      ticketEl.classList.remove("hidden");
-    }
-
-    async function editRSVP() {
-      try {
-        const saved = localStorage.getItem("rsvp_ticket_data");
-        if (saved) {
-          const data = JSON.parse(saved);
-          if (data.name) {
-            document.getElementById("guestName").value = data.name;
-            fetch("/api/rsvp/delete", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ name: data.name })
-            }).catch(() => {});
-          }
-          if (data.attendance) {
-            const rad = document.querySelector(`input[name="attendance"][value="${data.attendance}"]`);
-            if (rad) {
-              rad.checked = true;
-              toggleArrivalTime();
-            }
-          }
-          if (data.arrivalTime) document.getElementById("arrivalTime").value = data.arrivalTime;
-          if (data.message) document.getElementById("guestMessage").value = data.message;
-        }
-        localStorage.removeItem("rsvp_ticket_data");
-      } catch (e) {}
-      document.getElementById("rsvpTicket").classList.add("hidden");
-      document.getElementById("rsvpForm").classList.remove("hidden");
-    }
-
-    function checkExistingTicket() {
-      try {
-        const saved = localStorage.getItem("rsvp_ticket_data");
-        if (saved) {
-          const data = JSON.parse(saved);
-          renderTicket(data);
-        }
-      } catch (e) {}
-    }
-
-    function populateArrivalTimes() {
-      const select = document.getElementById("arrivalTime");
-      for (let m = 15 * 60; m <= 17 * 60 + 30; m += 15) {
-        const h = String(Math.floor(m / 60)).padStart(2, "0");
-        const mi = String(m % 60).padStart(2, "0");
-        select.insertAdjacentHTML("beforeend", `<option value="${h}:${mi}">${h}:${mi}</option>`);
-      }
-    }
-
-    function toggleArrivalTime() {
-      const yes = document.querySelector('input[name="attendance"]:checked')?.value === "yes";
-      const field = document.getElementById("arrivalTimeField");
-      const sel = document.getElementById("arrivalTime");
-      field.classList.toggle("hidden", !yes);
-      sel.required = yes;
-      if (!yes) sel.value = "";
-    }
-
-    function showToast(title, msg) {
-      const t = document.getElementById("toastNotification");
-      document.getElementById("toastTitle").textContent = title;
-      document.getElementById("toastMessage").textContent = msg;
-      t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 4000);
-    }
-
-    function celebrate() {
-      if (!window.confetti) return;
-      confetti({ particleCount: 80, spread: 80, origin: { y: 0.7 }, colors: ["#e63946","#f5c518","#ffffff","#c1121f"] });
-    }
-
-    async function handleRSVPSubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById("guestName").value.trim();
-      const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
-      const arrivalTime = document.getElementById("arrivalTime").value;
-      const message = document.getElementById("guestMessage").value.trim();
-      if (!name || !attendance || (attendance === "yes" && !arrivalTime)) return;
-
-      const btn = document.querySelector('#rsvpForm .submit-btn');
-      btn.disabled = true;
-
-      try {
-        const res = await fetch("/api/rsvp", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, attendance, arrivalTime, message })
-        });
-        const result = await res.json();
-        if (!res.ok) throw new Error(result.error || "Không thể lưu xác nhận.");
-
-        const code = `#HUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-        const ticketData = { name, attendance, arrivalTime, message, code };
-        localStorage.setItem("rsvp_ticket_data", JSON.stringify(ticketData));
-
-        if (attendance === "yes") celebrate();
-        renderTicket(ticketData);
-        showToast(result.updated ? "Đã cập nhật" : "Đã ghi nhận", result.message);
-      } catch (e) {
-        showToast("Chưa gửi được", "Vui lòng mở trang bằng server rồi thử lại.");
-      } finally {
-        btn.disabled = false;
-      }
-    }
-
     function addToGoogleCalendar() {
       const title = encodeURIComponent(`Lễ tốt nghiệp Bách khoa — ${appData.name}`);
       const details = encodeURIComponent(`Lễ trao bằng tốt nghiệp — ${appData.major}.\nĐịa điểm: Hội trường C2, Đại học Bách khoa Hà Nội.`);
@@ -1425,10 +1003,8 @@
     }
 
     updateDOMWithConfig();
-    populateArrivalTimes();
     updateCountdown();
     setInterval(updateCountdown, 1000);
-    checkExistingTicket();
   </script>
 </body>
 </html>
