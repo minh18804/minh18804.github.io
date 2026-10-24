@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp mời lễ tốt nghiệp | Lê Viết Minh · ĐHBK Hà Nội</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --red: #e63946;
+      --red-deep: #c1121f;
+      --red-glow: rgba(230, 57, 70, 0.30);
+      --gold: #f5c518;
+      --gold-dim: #c9a227;
+
+      --bg-0: #08080c;
+      --bg-1: #0e0e14;
+      --bg-2: rgba(18, 18, 28, 0.72);
+      --bg-3: rgba(24, 24, 36, 0.60);
+
+      --t1: #f0f0f5;
+      --t2: #a0a0b8;
+      --t3: #64647a;
+
+      --border: rgba(255,255,255,0.06);
+      --border-a: rgba(230,57,70,0.22);
+
+      --r: 14px;
+      --r-sm: 8px;
+      --sans: "Inter", system-ui, sans-serif;
+      --mono: "JetBrains Mono", "Consolas", monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--t1);
+      background: var(--bg-0);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ══════════ NAV / TOC ══════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 8, 12, 0.82);
+      backdrop-filter: blur(14px) saturate(1.6);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0 1.25rem;
+      height: 3.2rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-brand {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      white-space: nowrap;
+      margin-right: 0.75rem;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    .nav a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--t3);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 0.4rem 0.65rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--t1);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ══════════ HERO ══════════ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 20%, rgba(230,57,70,0.10), transparent 65%),
+        radial-gradient(ellipse 40% 40% at 85% 70%, rgba(245,197,24,0.05), transparent 50%);
+      pointer-events: none;
+    }
+
+    /* grid pattern */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 3.5rem 2rem 3rem;
+      min-height: min(520px, 65vh);
+    }
+
+    .hero-text {
+      animation: fadeRight 0.7s ease both;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0.35rem 0.85rem;
+      background: rgba(245,197,24,0.08);
+      border: 1px solid rgba(245,197,24,0.14);
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-school {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-school img {
+      width: 48px;
+      height: auto;
+      filter: drop-shadow(0 0 14px rgba(230,57,70,0.25));
+    }
+
+    .hero-school-text h1 {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .hero-school-text span {
+      font-size: 0.78rem;
+      color: var(--t3);
+    }
+
+    .hero-invite-text {
+      font-size: 1.05rem;
+      color: var(--t2);
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      max-width: 40ch;
+    }
+
+    .hero-name {
+      font-family: var(--mono);
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--red) 15%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-major {
+      font-size: 0.95rem;
+      color: var(--t2);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .hero-meta-row .k {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red);
+      width: 3.5rem;
+      flex-shrink: 0;
+    }
+
+    .hero-meta-row .v {
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* Hero portrait side */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeLeft 0.8s ease 0.1s both;
+    }
+
+    .portrait-wrap {
+      position: relative;
+    }
+
+    .portrait-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--red), var(--gold-dim), var(--red));
+      opacity: 0.15;
+      animation: spin 12s linear infinite;
+    }
+
+    .portrait {
+      width: min(260px, 42vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--red);
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 0 0 8px rgba(230,57,70,0.06),
+        0 0 60px rgba(230,57,70,0.18),
+        0 24px 60px rgba(0,0,0,0.45);
+      transition: transform 0.4s ease;
+    }
+
+    .portrait:hover { transform: scale(1.04); }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+
+    /* ══════════ MAIN CONTENT ══════════ */
+    .main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    /* ══════════ SECTION CARD ══════════ */
+    .card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      animation: rise 0.6s ease both;
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: rgba(255,255,255,0.10); }
+
+    .card-full { grid-column: 1 / -1; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border-radius: var(--r-sm);
+      background: rgba(230,57,70,0.10);
+      color: var(--red);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card-sub {
+      font-size: 0.82rem;
+      color: var(--t3);
+    }
+
+    /* ══════════ COUNTDOWN ══════════ */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .cd-box {
+      text-align: center;
+      padding: 0.85rem 0.3rem 0.7rem;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cd-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+    }
+
+    .cd-num {
+      font-family: var(--mono);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-weight: 700;
+      background: linear-gradient(180deg, var(--red), var(--gold-dim));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cd-label {
+      margin-top: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--t3);
+    }
+
+    /* ══════════ SCHEDULE ══════════ */
+    .timeline {
+      display: grid;
+      gap: 0;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: 0.85rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .tl-item:last-child { border-bottom: 0; }
+
+    .tl-time {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--red);
+      padding-top: 0.1rem;
+    }
+
+    .tl-title {
+      font-size: 0.92rem;
+      font-weight: 650;
+      margin-bottom: 0.15rem;
+    }
+
+    .tl-desc {
+      font-size: 0.82rem;
+      color: var(--t2);
+    }
+
+    /* ══════════ RSVP ══════════ */
+    label, legend {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 0.4rem;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      background: rgba(255,255,255,0.035);
+      color: var(--t1);
+      margin-bottom: 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: var(--t3); }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px var(--red-glow);
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364647a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.8rem center;
+      padding-right: 2.2rem;
+    }
+    select option { background: var(--bg-1); color: var(--t1); }
+
+    fieldset { border: 0; margin: 0 0 0.85rem; padding: 0; }
+
+    .choice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .choice label {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      text-transform: none;
+      letter-spacing: 0;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--t1);
+      cursor: pointer;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .choice label:hover { border-color: rgba(255,255,255,0.12); }
+    .choice label:has(input:checked) {
+      border-color: var(--red);
+      background: rgba(230,57,70,0.07);
+    }
+    .choice input { accent-color: var(--red); }
+
+    .hidden { display: none !important; }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 0.15rem;
+      border: 0;
+      border-radius: var(--r-sm);
+      background: linear-gradient(135deg, var(--red), var(--red-deep));
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--red-glow);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .submit-btn:hover {
+      box-shadow: 0 6px 28px rgba(230,57,70,0.45);
+      transform: translateY(-1px);
+    }
+    .submit-btn:disabled { opacity: 0.5; cursor: wait; transform: none; box-shadow: none; }
+
+    /* ══════════ TICKET UI ══════════ */
+    .rsvp-ticket {
+      background: linear-gradient(145deg, rgba(26, 26, 32, 0.95), rgba(18, 18, 22, 0.98));
+      border: 1px solid rgba(245, 197, 24, 0.35);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(245, 197, 24, 0.08);
+      overflow: hidden;
+      animation: rise 0.4s ease-out;
+    }
+
+    .rsvp-ticket::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--red), var(--gold));
+    }
+
+    .ticket-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+      margin-bottom: 1.2rem;
+    }
+
+    .ticket-badge {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ticket-status-tag {
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(245, 197, 24, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(245, 197, 24, 0.4);
+    }
+    .ticket-status-tag.no {
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--red);
+      border-color: rgba(230, 57, 70, 0.4);
+    }
+
+    .ticket-main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .ticket-main-grid { grid-template-columns: 1fr; }
+    }
+
+    .t-field .t-lbl {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--t3);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .t-field .t-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--t1);
+    }
+    .t-field .t-val.name {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .t-field .t-val.highlight {
+      color: var(--gold);
+    }
+
+    .ticket-quote-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 3px solid var(--gold);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--t2);
+      margin-top: 0.5rem;
+      word-break: break-word;
+    }
+
+    .ticket-footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .ticket-code-str {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--t3);
+      letter-spacing: 0.08em;
+    }
+    .ticket-code-str span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ══════════ MAP ══════════ */
+    .map-wrap {
+      overflow: hidden;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
+      aspect-ratio: 16 / 9;
+      margin-top: 1rem;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: brightness(0.82) contrast(1.1);
+    }
+
+    /* ══════════ CONTACTS ══════════ */
+    .contact-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+    .contact-row:last-child { border-bottom: 0; }
+    .contact-row:hover { background: rgba(255,255,255,0.02); border-radius: var(--r-sm); }
+
+    .c-ico {
+      width: 2.2rem;
+      height: 2.2rem;
+      display: grid;
+      place-items: center;
+      border-radius: var(--r-sm);
+      background: rgba(230,57,70,0.10);
+      color: var(--red);
+    }
+    .c-ico svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+
+    .c-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--t3);
+      margin-bottom: 0.1rem;
+    }
+
+    .c-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      word-break: break-all;
+    }
+
+    .c-arrow {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--red);
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .contact-row:hover .c-arrow { transform: translate(2px, -2px); }
+
+    /* ══════════ BUTTONS ══════════ */
+    .btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      color: var(--t1);
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.6rem 1rem;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      text-decoration: none;
+      backdrop-filter: blur(6px);
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      box-shadow: 0 3px 14px var(--red-glow);
+    }
+    .btn-primary:hover {
+      background: var(--red-deep);
+      border-color: var(--red-deep);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(230,57,70,0.4);
+    }
+
+    /* ══════════ FOOTER ══════════ */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      font-size: 0.8rem;
+      color: var(--t3);
+    }
+
+    .footer strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ══════════ TOAST ══════════ */
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 200;
+      max-width: min(360px, calc(100vw - 2rem));
+      background: var(--bg-2);
+      color: var(--t1);
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--r);
+      border: 1px solid var(--border-a);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      transform: translateY(120%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast .tt {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .toast .tm { font-size: 0.85rem; }
+
+    /* ══════════ ANIMATIONS ══════════ */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 1.25rem 2.5rem;
+        gap: 1.5rem;
+        min-height: auto;
+      }
+
+      .hero-visual { order: -1; }
+
+      .portrait-wrap::before { inset: -12px; }
+      .portrait { width: min(180px, 50vw); }
+
+      .hero-school { justify-content: center; }
+      .hero-invite-text { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-meta-row { justify-content: center; }
+      .hero-meta-row .k { width: auto; }
+
+      .main { padding: 0 1rem 2.5rem; }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .tl-item {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+
+      .nav-brand { font-size: 0.65rem; margin-right: 0.4rem; }
+      .nav a { font-size: 0.72rem; padding: 0.35rem 0.5rem; }
+      .nav-inner { height: 2.8rem; padding: 0 0.75rem; }
+
+      html { scroll-padding-top: 3.2rem; }
+    }
+
+    @media (max-width: 420px) {
+      .hero-name { font-size: 1.6rem; }
+      .hero-inner { padding: 1.5rem 1rem 2rem; }
+      .countdown { gap: 0.35rem; }
+      .choice { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ══════════ SCROLLBAR ══════════ */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-0); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAVIGATION / TOC ══════════ -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="#hero">Trang chủ</a>
+      <a href="#countdown">Đếm ngược</a>
+      <a href="#schedule">Lịch trình</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#location">Bản đồ</a>
+      <a href="#contact">Liên hệ</a>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">✦ Thiệp mời tốt nghiệp</div>
+
+        <div class="hero-school">
+          <img src="logo-hust.svg" width="48" height="72" alt="Logo ĐHBK Hà Nội">
+          <div class="hero-school-text">
+            <h1>ĐẠI HỌC BÁCH KHOA HÀ NỘI</h1>
+            <span>Trường Điện — Điện tử</span>
+          </div>
+        </div>
+
+        <p class="hero-invite-text">Trân trọng kính mời quý thầy cô, gia đình và bạn bè đến dự lễ tốt nghiệp của</p>
+
+        <p class="hero-name" id="displayHeroName">Lê Viết Minh</p>
+        <p class="hero-major" id="displayHeroMajor">Cử nhân ngành Kỹ thuật Điện tử — Viễn thông</p>
+
+        <div class="hero-meta">
+          <div class="hero-meta-row">
+            <span class="k">When</span>
+            <strong class="v" id="displayTargetDateText">Chủ Nhật, 27 tháng 9 năm 2026 · 13:00</strong>
+          </div>
+          <div class="hero-meta-row">
+            <span class="k">Where</span>
+            <span class="v">Hội trường C2 · ĐHBK Hà Nội</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#rsvp">Xác nhận tham dự</a>
+          <button type="button" class="btn" onclick="addToGoogleCalendar()">📅 Thêm lịch</button>
+          <button type="button" class="btn" onclick="openHustMap()">📍 Bản đồ</button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="portrait-wrap">
+          <figure class="portrait">
+            <img src="portrait.jpg" width="440" height="440" alt="Lê Viết Minh trong lễ phục tốt nghiệp ĐHBK Hà Nội 2026">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ MAIN CONTENT ══════════ -->
+  <div class="main">
+    <div class="grid-2">
+
+      <!-- Countdown -->
+      <div class="card" id="countdown">
+        <div class="card-header">
+          <div class="card-icon">⏱</div>
+          <div>
+            <div class="card-title">Đếm ngược</div>
+            <div class="card-sub">Tới buổi lễ tại Hội trường C2</div>
+          </div>
+        </div>
+        <div class="countdown" aria-live="polite">
+          <div class="cd-box"><div class="cd-num" id="countDays">00</div><div class="cd-label">Ngày</div></div>
+          <div class="cd-box"><div class="cd-num" id="countHours">00</div><div class="cd-label">Giờ</div></div>
+          <div class="cd-box"><div class="cd-num" id="countMinutes">00</div><div class="cd-label">Phút</div></div>
+          <div class="cd-box"><div class="cd-num" id="countSeconds">00</div><div class="cd-label">Giây</div></div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="card" id="contact">
+        <div class="card-header">
+          <div class="card-icon">💬</div>
+          <div>
+            <div class="card-title">Liên hệ</div>
+            <div class="card-sub">Nhắn Facebook hoặc gọi điện cho Minh</div>
+          </div>
+        </div>
+        <a class="contact-row" id="displayFacebook" href="https://www.facebook.com/levietminh18804/" target="_blank" rel="noopener noreferrer">
+          <span class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14V8.5c0-.8.2-1.3 1.4-1.3H17V4.1C16.7 4.1 15.7 4 14.6 4 12.2 4 10.5 5.5 10.5 8.2V10.5H8v3h2.5V20h3.5v-6.5z"/></svg>
+          </span>
+          <span>
+            <div class="c-label">Facebook</div>
+            <div class="c-value">facebook.com/levietminh18804</div>
+          </span>
+          <span class="c-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-row" id="displayPhoneLink" href="tel:+84962057531">
+          <span class="c-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
+          </span>
+          <span>
+            <div class="c-label">Số điện thoại</div>
+            <div class="c-value" id="displayPhone">0962 057 531</div>
+          </span>
+          <span class="c-arrow" aria-hidden="true">☎</span>
+        </a>
+      </div>
+
+      <!-- Schedule -->
+      <div class="card" id="schedule">
+        <div class="card-header">
+          <div class="card-icon">📋</div>
+          <div>
+            <div class="card-title">Lịch trình</div>
+            <div class="card-sub">Ngày 27 tháng 9 năm 2026</div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-time">13:00 – 13:30</div>
+            <div>
+              <div class="tl-title">Check-in &amp; đón tiếp</div>
+              <div class="tl-desc">Nhận lễ phục, chào đón gia đình và bạn bè tại sảnh Hội trường C2.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">13:30 – 15:00</div>
+            <div>
+              <div class="tl-title">Lễ trao bằng</div>
+              <div class="tl-desc">Nghi thức chào cờ, diễn văn và trao bằng tốt nghiệp tại Hội trường C2.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">15:00 – 17:30</div>
+            <div>
+              <div class="tl-title">Chụp ảnh kỷ niệm &amp; Giao lưu</div>
+              <div class="tl-desc">Đón tiếp bạn bè chụp ảnh tại Quảng trường C1, Cổng Parabol, Thư viện Tạ Quang Bửu.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location / Map -->
+      <div class="card" id="location">
+        <div class="card-header">
+          <div class="card-icon">📍</div>
+          <div>
+            <div class="card-title">Địa điểm</div>
+            <div class="card-sub">Hội trường C2, ĐHBK Hà Nội</div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe
+            title="Bản đồ Hội trường C2, Đại học Bách khoa Hà Nội"
+            src="https://www.google.com/maps?q=H%E1%BB%99i+tr%C6%B0%E1%BB%9Dng+C2+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+B%C3%A1ch+khoa+H%C3%A0+N%E1%BB%99i&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- RSVP -->
+      <div class="card card-full" id="rsvp">
+        <div class="card-header">
+          <div class="card-icon">✉</div>
+          <div>
+            <div class="card-title">Xác nhận tham dự</div>
+            <div class="card-sub">Cho Minh biết bạn có thể đến chung vui nhé</div>
+          </div>
+        </div>
+
+        <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 1.25rem;">
+          <div>
+            <label for="guestName">Họ và tên *</label>
+            <input type="text" id="guestName" required placeholder="Nhập họ và tên của bạn" autocomplete="name">
+
+            <fieldset>
+              <legend>Bạn có tham dự không? *</legend>
+              <div class="choice">
+                <label>
+                  <input type="radio" name="attendance" value="yes" required onchange="toggleArrivalTime()">
+                  Có, mình sẽ đến
+                </label>
+                <label>
+                  <input type="radio" name="attendance" value="no" onchange="toggleArrivalTime()">
+                  Không thể tham dự
+                </label>
+              </div>
+            </fieldset>
+
+            <div id="arrivalTimeField" class="hidden">
+              <label for="arrivalTime">Giờ dự kiến đến *</label>
+              <select id="arrivalTime">
+                <option value="">Chọn giờ</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column;">
+            <label for="guestMessage">Lời nhắn</label>
+            <textarea id="guestMessage" rows="5" placeholder="Gửi Minh một lời chúc..." style="flex:1; min-height:120px;"></textarea>
+          </div>
+
+          <div style="grid-column: 1 / -1; margin-top: 0.25rem;">
+            <button type="submit" class="submit-btn">Gửi xác nhận</button>
+          </div>
+        </form>
+
+        <!-- RSVP Ticket View (Hidden until submit) -->
+        <div id="rsvpTicket" class="rsvp-ticket hidden">
+          <div class="ticket-header-bar">
+            <div class="ticket-badge">✨ VÉ XÁC NHẬN THAM DỰ</div>
+            <div id="ticketStatusTag" class="ticket-status-tag">✓ Sẽ đến tham dự</div>
+          </div>
+
+          <div class="ticket-main-grid">
+            <div class="t-field">
+              <span class="t-lbl">Khách mời</span>
+              <div id="ticketName" class="t-val name">—</div>
+            </div>
+            <div class="t-field" id="ticketTimeWrap">
+              <span class="t-lbl">Giờ dự kiến đến</span>
+              <div id="ticketTimeVal" class="t-val highlight">—</div>
+            </div>
+          </div>
+
+          <div class="t-field" style="margin-bottom: 0.8rem;">
+            <span class="t-lbl">Địa điểm diễn ra</span>
+            <div class="t-val">Hội trường C2, Đại học Bách khoa Hà Nội</div>
+          </div>
+
+          <div class="t-field" id="ticketMessageWrap">
+            <span class="t-lbl">Lời chúc gửi tới Minh</span>
+            <div id="ticketMessageVal" class="ticket-quote-box">—</div>
+          </div>
+
+          <div class="ticket-footer-bar">
+            <div class="ticket-code-str">MÃ VÉ: <span id="ticketCodeVal">#HUST-2026</span></div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button type="button" class="btn btn-sm" onclick="editRSVP()">✏️ Chỉnh sửa lại</button>
+              <button type="button" class="btn btn-sm btn-primary" onclick="addToGoogleCalendar()">📅 Thêm Calendar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <strong>Đại học Bách khoa Hà Nội · Trường Điện — Điện tử</strong>
+      Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội
+    </div>
+  </footer>
+
+  <!-- ══════════ TOAST ══════════ -->
+  <div id="toastNotification" class="toast" role="status" aria-live="polite">
+    <div class="tt" id="toastTitle">Thông báo</div>
+    <div class="tm" id="toastMessage"></div>
+  </div>
+
+  <script>
+    /* ── Nav: explicit click-to-scroll ── */
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
+        const navH = document.querySelector('.nav')?.offsetHeight || 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+        window.scrollTo({ top, behavior: 'smooth' });
+        // Update active immediately
+        navLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    /* ── Nav: highlight active section on scroll ── */
+    const navSectionIds = Array.from(navLinks).map(a => a.getAttribute('href').slice(1));
+
+    function updateActiveNav() {
+      const navH = document.querySelector('.nav')?.offsetHeight || 0;
+      const scrollY = window.scrollY + navH + 40;
+      let current = navSectionIds[0];
+
+      for (const id of navSectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top + window.scrollY <= scrollY) {
+          current = id;
+        }
+      }
+
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    /* ── Scroll reveal ── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.animationPlayState = 'running';
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.animationPlayState = 'paused';
+      revealObs.observe(c);
+    });
+
+    /* ── Responsive RSVP form grid ── */
+    function adjustFormLayout() {
+      const form = document.getElementById('rsvpForm');
+      if (!form) return;
+      form.style.gridTemplateColumns = window.innerWidth <= 640 ? '1fr' : '1fr 1fr';
+    }
+    adjustFormLayout();
+    window.addEventListener('resize', adjustFormLayout);
+
+    /* ── App data ── */
+    const appData = {
+      name: "Lê Viết Minh",
+      major: "Cử nhân ngành Kỹ thuật Điện tử — Viễn thông",
+      targetDate: "2026-09-27T13:00",
+      phone: "0962 057 531",
+      phoneTel: "+84962057531",
+      facebook: "https://www.facebook.com/levietminh18804/"
+    };
+
+    function updateDOMWithConfig() {
+      document.getElementById("displayHeroName").textContent = appData.name;
+      document.getElementById("displayHeroMajor").textContent = appData.major;
+      document.getElementById("displayPhone").textContent = appData.phone;
+      document.getElementById("displayPhoneLink").href = `tel:${appData.phoneTel}`;
+      document.getElementById("displayFacebook").href = appData.facebook;
+      try {
+        const d = new Date(appData.targetDate);
+        document.getElementById("displayTargetDateText").textContent =
+          d.toLocaleDateString("vi-VN", {
+            weekday: "long", year: "numeric", month: "long", day: "numeric",
+            hour: "2-digit", minute: "2-digit"
+          });
+      } catch (e) {}
+    }
+
+    function updateCountdown() {
+      const diff = new Date(appData.targetDate).getTime() - Date.now();
+      if (diff <= 0) {
+        ["countDays","countHours","countMinutes","countSeconds"].forEach(id =>
+          document.getElementById(id).textContent = "00"
+        );
+        return;
+      }
+      document.getElementById("countDays").textContent    = String(Math.floor(diff / 86400000)).padStart(2, "0");
+      document.getElementById("countHours").textContent   = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0");
+      document.getElementById("countMinutes").textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+      document.getElementById("countSeconds").textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+    }
+
+    function renderTicket(data) {
+      const ticketEl = document.getElementById("rsvpTicket");
+      const formEl = document.getElementById("rsvpForm");
+      if (!ticketEl || !formEl) return;
+
+      document.getElementById("ticketName").textContent = data.name;
+      
+      const isYes = data.attendance === 'yes';
+      const statusTag = document.getElementById("ticketStatusTag");
+      statusTag.textContent = isYes ? "✓ Sẽ đến tham dự" : "✗ Không thể tham dự";
+      statusTag.className = isYes ? "ticket-status-tag" : "ticket-status-tag no";
+
+      const timeWrap = document.getElementById("ticketTimeWrap");
+      if (isYes && data.arrivalTime) {
+        timeWrap.style.display = "block";
+        document.getElementById("ticketTimeVal").textContent = `${data.arrivalTime} — Chủ Nhật, 27/09/2026`;
+      } else {
+        timeWrap.style.display = "none";
+      }
+
+      const msgWrap = document.getElementById("ticketMessageWrap");
+      if (data.message) {
+        msgWrap.style.display = "block";
+        document.getElementById("ticketMessageVal").textContent = `"${data.message}"`;
+      } else {
+        msgWrap.style.display = "none";
+      }
+
+      const code = data.code || `#HUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+      document.getElementById("ticketCodeVal").textContent = code;
+
+      formEl.classList.add("hidden");
+      ticketEl.classList.remove("hidden");
+    }
+
+    async function editRSVP() {
+      try {
+        const saved = localStorage.getItem("rsvp_ticket_data");
+        if (saved) {
+          const data = JSON.parse(saved);
+          if (data.name) {
+            document.getElementById("guestName").value = data.name;
+            fetch("/api/rsvp/delete", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name: data.name })
+            }).catch(() => {});
+          }
+          if (data.attendance) {
+            const rad = document.querySelector(`input[name="attendance"][value="${data.attendance}"]`);
+            if (rad) {
+              rad.checked = true;
+              toggleArrivalTime();
+            }
+          }
+          if (data.arrivalTime) document.getElementById("arrivalTime").value = data.arrivalTime;
+          if (data.message) document.getElementById("guestMessage").value = data.message;
+        }
+        localStorage.removeItem("rsvp_ticket_data");
+      } catch (e) {}
+      document.getElementById("rsvpTicket").classList.add("hidden");
+      document.getElementById("rsvpForm").classList.remove("hidden");
+    }
+
+    function checkExistingTicket() {
+      try {
+        const saved = localStorage.getItem("rsvp_ticket_data");
+        if (saved) {
+          const data = JSON.parse(saved);
+          renderTicket(data);
+        }
+      } catch (e) {}
+    }
+
+    function populateArrivalTimes() {
+      const select = document.getElementById("arrivalTime");
+      for (let m = 15 * 60; m <= 17 * 60 + 30; m += 15) {
+        const h = String(Math.floor(m / 60)).padStart(2, "0");
+        const mi = String(m % 60).padStart(2, "0");
+        select.insertAdjacentHTML("beforeend", `<option value="${h}:${mi}">${h}:${mi}</option>`);
+      }
+    }
+
+    function toggleArrivalTime() {
+      const yes = document.querySelector('input[name="attendance"]:checked')?.value === "yes";
+      const field = document.getElementById("arrivalTimeField");
+      const sel = document.getElementById("arrivalTime");
+      field.classList.toggle("hidden", !yes);
+      sel.required = yes;
+      if (!yes) sel.value = "";
+    }
+
+    function showToast(title, msg) {
+      const t = document.getElementById("toastNotification");
+      document.getElementById("toastTitle").textContent = title;
+      document.getElementById("toastMessage").textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 4000);
+    }
+
+    function celebrate() {
+      if (!window.confetti) return;
+      confetti({ particleCount: 80, spread: 80, origin: { y: 0.7 }, colors: ["#e63946","#f5c518","#ffffff","#c1121f"] });
+    }
+
+    async function handleRSVPSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById("guestName").value.trim();
+      const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
+      const arrivalTime = document.getElementById("arrivalTime").value;
+      const message = document.getElementById("guestMessage").value.trim();
+      if (!name || !attendance || (attendance === "yes" && !arrivalTime)) return;
+
+      const btn = document.querySelector('#rsvpForm .submit-btn');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/rsvp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, attendance, arrivalTime, message })
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error || "Không thể lưu xác nhận.");
+
+        const code = `#HUST-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+        const ticketData = { name, attendance, arrivalTime, message, code };
+        localStorage.setItem("rsvp_ticket_data", JSON.stringify(ticketData));
+
+        if (attendance === "yes") celebrate();
+        renderTicket(ticketData);
+        showToast(result.updated ? "Đã cập nhật" : "Đã ghi nhận", result.message);
+      } catch (e) {
+        showToast("Chưa gửi được", "Vui lòng mở trang bằng server rồi thử lại.");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function addToGoogleCalendar() {
+      const title = encodeURIComponent(`Lễ tốt nghiệp Bách khoa — ${appData.name}`);
+      const details = encodeURIComponent(`Lễ trao bằng tốt nghiệp — ${appData.major}.\nĐịa điểm: Hội trường C2, Đại học Bách khoa Hà Nội.`);
+      const location = encodeURIComponent("Hội trường C2, Đại học Bách khoa Hà Nội, Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội");
+      const start = new Date(appData.targetDate).toISOString().replace(/-|:|\.\d{3}/g, "");
+      const end = new Date(new Date(appData.targetDate).getTime() + 4 * 3600000).toISOString().replace(/-|:|\.\d{3}/g, "");
+      window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`, "_blank");
+    }
+
+    function openHustMap() {
+      window.open("https://www.google.com/maps/search/?api=1&query=Hội+trường+C2+Đại+học+Bách+khoa+Hà+Nội", "_blank");
+    }
+
+    updateDOMWithConfig();
+    populateArrivalTimes();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    checkExistingTicket();
+  </script>
+</body>
+</html>
